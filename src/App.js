@@ -18,7 +18,9 @@ function App() {
 
     <Switch>
       <Route path = '/signup'>
-          <Signup/>
+          <Signup
+          
+          />
         </Route>
         <Route path = '/login'>
           <Login/>
