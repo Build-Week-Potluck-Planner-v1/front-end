@@ -3,9 +3,6 @@ import axios from 'axios'
 import { reach } from 'yup'
 import schema from '../validation/formSchema'
 
-
-
-
 const initialFormValues = {
     username: '',
     password: '',
@@ -19,15 +16,8 @@ const initialFormErrors = {
 
 }
 
-
-
-
 function Signup() {
-
-
-
 const [username, setName] = useState('')
-
 const [password, setPassword] = useState('')
 const [code, setCode] = useState('')
 const [formValues, setFormValues] = useState(initialFormValues)
@@ -87,8 +77,6 @@ function validateNumbers(evt) {
       if(theEvent.preventDefault) theEvent.preventDefault();
     }
   }
-
-
 
     return (
         <div>
