@@ -29,6 +29,7 @@ function Signup() {
 const [name, setName] = useState('')
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
+const [code, setCode] = useState('')
 const [formValues, setFormValues] = useState(initialFormValues)
 const [formErrors, setFormErrors] = useState(initialFormErrors)
 
@@ -54,7 +55,9 @@ const formSubmit = () =>{
     const newAccount = {
         name: formValues.name.trim(),
         email: formValues.email.trim(),
-        password: formValues.password.trim()
+        password: formValues.password.trim(),
+        code: formValues.code.trim(),
+        code: formValues.code.integer(4)
     }
     console.log(newAccount)
     postNewAccount(newAccount)
@@ -77,6 +80,7 @@ const inputChange = (name, value) =>{
                 <div>{formErrors.name}</div>
                 <div>{formErrors.email}</div>
                 <div>{formErrors.password}</div>
+                <div>{formErrors.code}</div>
             </div>
           <form className='form-container' onSubmit={(evt)=>{
               evt.preventDefault()
@@ -112,11 +116,30 @@ const inputChange = (name, value) =>{
             <label>
                 Password: <input 
                 type='password'
+                placeholder='********'
                 name='password' 
                 value={password} 
                 onChange={(evt)=> {
                     setPassword(evt.target.value)
                     inputChange(evt.target.name, evt.target.value)  
+             }}></input>
+            </label>
+        </div>
+        <div className='planner-code'>  
+            <label>
+                Planner Code: <input 
+                type='text'
+                placeholder='Please enter a 4 digit code'
+               
+                minLength='4'
+                maxLength='4'
+                required
+                name='code' 
+                value={code} 
+                onChange={(evt)=> {
+                    setCode(evt.target.value)
+                    inputChange(evt.target.name, evt.target.value) 
+                    
              }}></input>
             </label>
         </div>

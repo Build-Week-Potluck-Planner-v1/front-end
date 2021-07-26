@@ -15,8 +15,14 @@ const formSchema = yup.object().shape({
         .required('Password is required.')
         .matches(
             /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-            "Password must contain at least 8 characters, one uppercase, one number and one special case character"
-          ),  
+            "Password must contain at least 8 characters, one uppercase, one number and one special case character"),
+    code: yup
+        .string()
+        .required('Planner code is required.')
+        .min(4, 'Code must be 4 numbers')
+        
+        
+       
 }) 
 
 export default formSchema
