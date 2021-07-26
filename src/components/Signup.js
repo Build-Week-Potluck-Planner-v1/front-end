@@ -7,15 +7,15 @@ import schema from '../validation/formSchema'
 
 
 const initialFormValues = {
-    name: '',
-    email: '',
+    username: '',
     password: '',
+    code: '',
 }
 
 const initialFormErrors = {
-    name: '',
-    email: '',
+    username: '',
     password: '',
+    code: '',
 
 }
 
@@ -26,8 +26,8 @@ function Signup() {
 
 
 
-const [name, setName] = useState('')
-const [email, setEmail] = useState('')
+const [username, setName] = useState('')
+
 const [password, setPassword] = useState('')
 const [code, setCode] = useState('')
 const [formValues, setFormValues] = useState(initialFormValues)
@@ -35,7 +35,7 @@ const [formErrors, setFormErrors] = useState(initialFormErrors)
 
 const postNewAccount = async (newAccount) =>{
     try {
-         const response = await axios.post('', newAccount)
+         const response = await axios.post('https://ft-potluck-planner-7-server.herokuapp.com/api/auth/register', newAccount)
             console.log(response)
     }catch(err){
         console.log(err)
@@ -53,12 +53,12 @@ const validate = (name, value) => {
 
 const formSubmit = () =>{
     const newAccount = {
-        name: formValues.name.trim(),
-        email: formValues.email.trim(),
+        username: formValues.username.trim(),
         password: formValues.password.trim(),
         code: formValues.code.trim(),
-        code: formValues.code.integer(4)
+        
     }
+        
     console.log(newAccount)
     postNewAccount(newAccount)
 }
@@ -70,6 +70,23 @@ const inputChange = (name, value) =>{
     })
 }
 
+function validateNumbers(evt) {
+    var theEvent = evt || window.event;
+  
+    // Handle paste
+    if (theEvent.type === 'paste') {
+        key = evt.clipboardData.getData('text/plain');
+    } else {
+    // Handle key press
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if( !regex.test(key) ) {
+      theEvent.returnValue = false;
+      if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
 
 
 
@@ -77,8 +94,7 @@ const inputChange = (name, value) =>{
         <div>
             <h1>Welcome, please signup below!</h1>
             <div className='errors'>
-                <div>{formErrors.name}</div>
-                <div>{formErrors.email}</div>
+                <div>{formErrors.username}</div>
                 <div>{formErrors.password}</div>
                 <div>{formErrors.code}</div>
             </div>
@@ -86,32 +102,20 @@ const inputChange = (name, value) =>{
               evt.preventDefault()
               formSubmit()
           }}>
-        <div className='name'>
+        <div className='username'>
             <label>
-                Name: <input 
+                Username: <input 
                 type='text' 
-                placeholder='First and Last'
-                name='name' 
-                value={name} 
+                placeholder='Please enter username'
+                name='username' 
+                value={username} 
                 onChange={(evt)=>{
                     setName(evt.target.value)
                     inputChange(evt.target.name, evt.target.value)  
              }}></input>
             </label>
         </div>   
-        <div className='email'>  
-            <label>
-                Email: <input 
-                type='email' 
-                placeholder='example@email.com'
-                name='email' 
-                value={email} 
-                onChange={(evt)=> {
-                    setEmail(evt.target.value)
-                    inputChange(evt.target.name, evt.target.value)  
-             }}></input>
-            </label>
-        </div>
+        
         <div className='password'>  
             <label>
                 Password: <input 
@@ -130,7 +134,9 @@ const inputChange = (name, value) =>{
                 Planner Code: <input 
                 type='text'
                 placeholder='Please enter a 4 digit code'
-               
+                onKeyPress={(evt)=>{
+                    validateNumbers(evt)
+                }}
                 minLength='4'
                 maxLength='4'
                 required
