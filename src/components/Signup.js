@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { reach } from 'yup'
-import { formatResultsErrors } from 'jest-message-util'
 import schema from '../validation/formSchema'
 
 
@@ -23,14 +22,8 @@ const initialFormErrors = {
 
 
 
-function Signup(props) {
+function Signup() {
 
-const {
-    values,
-    errors,
-    submit,
-    change,
-} = props
 
 
 const [name, setName] = useState('')
@@ -49,9 +42,10 @@ const postNewAccount = async (newAccount) =>{
 }
 
 const validate = (name, value) => {
+    
     reach(schema, name)
         .validate(value)
-        .then(()=> setFormErrors({...formatResultsErrors, [name]:value}))
+        .then(()=> setFormErrors({...formErrors, [name]: '' }))
         .catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}))
 }
 
@@ -60,8 +54,9 @@ const formSubmit = () =>{
     const newAccount = {
         name: formValues.name.trim(),
         email: formValues.email.trim(),
-        password: formValues.email.trim()
+        password: formValues.password.trim()
     }
+    console.log(newAccount)
     postNewAccount(newAccount)
 }
 
@@ -73,10 +68,21 @@ const inputChange = (name, value) =>{
 }
 
 
+
+
     return (
         <div>
             <h1>Welcome, please signup below!</h1>
-          <form>
+            <div className='errors'>
+                <div>{formErrors.name}</div>
+                <div>{formErrors.email}</div>
+                <div>{formErrors.password}</div>
+            </div>
+          <form className='form-container' onSubmit={(evt)=>{
+              evt.preventDefault()
+              formSubmit()
+          }}>
+        <div className='name'>
             <label>
                 Name: <input 
                 type='text' 
@@ -84,9 +90,12 @@ const inputChange = (name, value) =>{
                 name='name' 
                 value={name} 
                 onChange={(evt)=>{
-                    setName(evt.target.value)  
+                    setName(evt.target.value)
+                    inputChange(evt.target.name, evt.target.value)  
              }}></input>
             </label>
+        </div>   
+        <div className='email'>  
             <label>
                 Email: <input 
                 type='email' 
@@ -94,19 +103,25 @@ const inputChange = (name, value) =>{
                 name='email' 
                 value={email} 
                 onChange={(evt)=> {
-                    setEmail(evt.target.value)  
+                    setEmail(evt.target.value)
+                    inputChange(evt.target.name, evt.target.value)  
              }}></input>
             </label>
+        </div>
+        <div className='password'>  
             <label>
                 Password: <input 
                 type='password'
                 name='password' 
                 value={password} 
                 onChange={(evt)=> {
-                    setPassword(evt.target.value)  
+                    setPassword(evt.target.value)
+                    inputChange(evt.target.name, evt.target.value)  
              }}></input>
             </label>
+        </div>
             <button>submit</button>
+
           </form>  
         </div>
     )
