@@ -1,11 +1,12 @@
-import React from 'react'
+import ContactForm from "./ContactForm";
+import React from "react";
 
 function Homepage() {
-    return (
-        <div>
-            
-        </div>
-    )
+  return (
+    <div>
+      <ContactForm />
+    </div>
+  );
 }
 
-export default Homepage
+export default Homepage;
