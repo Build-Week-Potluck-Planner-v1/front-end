@@ -6,6 +6,7 @@
     axios.post('https://ft-potluck-planner-7-server.herokuapp.com/api/auth/login', user)
         .then(res => {
             dispatch({type: LOGIN_SUCCESS, payload: res.data})
+            localStorage.setItem('token', res.data.token)
         })
         .catch(err => {
             dispatch({type: LOGIN_ERROR, payload: err})
