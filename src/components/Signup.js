@@ -13,7 +13,6 @@ const initialFormErrors = {
     username: '',
     password: '',
     code: '',
-
 }
 
 function Signup() {
