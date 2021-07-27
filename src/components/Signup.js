@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { reach } from 'yup'
 import schema from '../validation/formSchema'
+import styled from 'styled-components'
 
 const initialFormValues = {
     username: '',
@@ -12,9 +13,9 @@ const initialFormValues = {
 const initialFormErrors = {
     username: '',
     password: '',
-    
-
 }
+
+
 
 function Signup() {
 const [username, setUsername] = useState('')
@@ -69,13 +70,13 @@ const inputChange = (name, value) =>{
                 <div>{formErrors.password}</div>
                 
             </div>
-          <form className='form-container' onSubmit={(evt)=>{
+          <form onSubmit={(evt)=>{
               evt.preventDefault()
               formSubmit()
           }}>
         <div className='username'>
-            <label>
-                Username: <input 
+            <label>Username:</label>
+                 <input 
                 type='text' 
                 placeholder='Please enter username'
                 name='username' 
@@ -84,12 +85,12 @@ const inputChange = (name, value) =>{
                     setUsername(evt.target.value)
                     inputChange(evt.target.name, evt.target.value)  
              }}></input>
-            </label>
+            
         </div>   
         
         <div className='password'>  
-            <label>
-                Password: <input 
+            <label>Password:</label>
+                 <input 
                 type='password'
                 placeholder='********'
                 name='password' 
@@ -98,7 +99,7 @@ const inputChange = (name, value) =>{
                     setPassword(evt.target.value)
                     inputChange(evt.target.name, evt.target.value)  
              }}></input>
-            </label>
+            
         </div>
         
             <button id='button'>submit</button>
@@ -107,5 +108,11 @@ const inputChange = (name, value) =>{
         </div>
     )
 }
+
+
+
+
+
+
 
 export default Signup
