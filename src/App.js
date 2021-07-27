@@ -1,3 +1,4 @@
+import React from 'react'
 import './App.css';
 import {Switch, Link, Route} from 'react-router-dom';
 import Homepage from './components/Homepage';
@@ -5,21 +6,22 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
-import React from 'react'
+import Plan from './components/Plan';
+import Invites from './components/Invites';
 
 function App() {
   return (
     <div className="App">
     
     <nav>
-        <Link to = '/'>Potluck Planner</Link>
         <Link to = '/'>Home</Link>
         <Link to = '/login'>Login</Link>
         <Link to = '/signup'>Sign Up</Link>
-        <Link to = '/dashboard'>Dashboard</Link>
     </nav>
 
     <Switch>
+      <PrivateRoute path = '/invites' component={Invites} />
+      <PrivateRoute path = '/plan' component={Plan} />
       <PrivateRoute path = '/dashboard' component={Dashboard} />
       <Route path = '/signup'>
           <Signup/>
