@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
+import { handleLogin } from "../store/actions";
 
 const FormStyle = styled.form`
   width: 80%;
@@ -33,8 +35,8 @@ const FormStyle = styled.form`
       }
 `;
 
-function Login() {
-  const initialLogIn = { email: "", password: "" };
+function Login(props) {
+  const initialLogIn = { username: "", password: "" };
   const [loginInput, setLoginInput] = useState(initialLogIn);
 
   const onChangeHandler = (evt) => {
@@ -45,19 +47,19 @@ function Login() {
 
   const onSubmitHandler = (evt) => {
     evt.preventDefault();
+    props.handleLogin(loginInput);
     setLoginInput(initialLogIn);
-    console.log(loginInput);
   };
 
   return (
-    <FormStyle onSumbit={onSubmitHandler}>
+    <FormStyle onSubmit={onSubmitHandler}>
       <div className="control">
-        <label>E-Mail</label>
+        <label>Username</label>
         <input
-          type="email"
-          name="email"
+          type="username"
+          name="username"
           onChange={onChangeHandler}
-          value={loginInput.email}
+          value={loginInput.username}
         />
       </div>
       <div className="control">
@@ -74,4 +76,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default connect(null, {handleLogin})(Login);

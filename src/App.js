@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {Switch, Link, Route} from 'react-router-dom';
 import Homepage from './components/Homepage';
@@ -11,6 +10,7 @@ function App() {
     <div className="App">
     
     <nav>
+        <Link to = '/'>Home</Link>
         <Link to = 'login'>Login</Link>
         <Link to = 'signup'>Sign Up</Link>
     </nav>
