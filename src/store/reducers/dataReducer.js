@@ -1,9 +1,9 @@
-import { SIGN_UP_SUCCESS, SIGN_UP_ERROR } from '../actions/index'
+import { LOGIN_SUCCESS, LOGIN_ERROR } from '../actions/index'
 
 export const initialState = {
     currentUser: {
         auth_code: null,
-        password: '',
+        id: 0,
         username: '',
     },
     errors: '',
@@ -20,15 +20,15 @@ export const initialState = {
 
 export const dataReducer = (state = initialState, action) => {
     switch(action.type) {
-        case SIGN_UP_SUCCESS:
-            return {
+        case LOGIN_SUCCESS:
+            return{
                 ...state,
-                currentUser: action.payload
+                currentUser: action.payload,
             }
-        case SIGN_UP_ERROR:
-            return {
+        case LOGIN_ERROR:
+            return{
                 ...state,
-                errprs: action.payload
+                errors: action.payload,
             }
         default:
             return state;

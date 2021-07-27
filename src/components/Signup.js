@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
-// import axios from 'axios'
+import axios from 'axios'
 import { reach } from 'yup'
 import schema from '../validation/formSchema'
-import { postAccount } from '../store/actions/index';
 
 const initialFormValues = {
     username: '',
@@ -15,57 +13,70 @@ const initialFormErrors = {
     username: '',
     password: '',
     code: '',
+
 }
 
-function Signup(props) {
-    const [username, setName] = useState('')
-    const [password, setPassword] = useState('')
-    const [code, setCode] = useState('')
-    const [formValues, setFormValues] = useState(initialFormValues)
-    const [formErrors, setFormErrors] = useState(initialFormErrors)
+function Signup() {
+const [username, setName] = useState('')
+const [password, setPassword] = useState('')
+const [code, setCode] = useState('')
+const [formValues, setFormValues] = useState(initialFormValues)
+const [formErrors, setFormErrors] = useState(initialFormErrors)
 
-    const validate = (name, value) => {
-        reach(schema, name)
-            .validate(value)
-            .then(()=> setFormErrors({...formErrors, [name]: '' }))
-            .catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}))
-    }
+const postNewAccount = async (newAccount) =>{
+    try {
+         const response = await axios.post('https://ft-potluck-planner-7-server.herokuapp.com/api/auth/register', newAccount)
+            console.log(response)
+    }catch(err){
+        console.log(err)
+    }    
+}
 
-
-    const formSubmit = (event) =>{
-        event.preventDefault();
-        const newAccount = {
-            username: formValues.username.trim(),
-            password: formValues.password.trim(),
-            code: formValues.code.trim(),
-        }
-        props.postAccount(newAccount);
-    }
-
-    const inputChange = (name, value) =>{
-        validate(name, value)
-        setFormValues({
-            ...formValues, [name]: value
-        })
-    }
-
-    function validateNumbers(evt) {
-        var theEvent = evt || window.event;
+const validate = (name, value) => {
     
-        // Handle paste
-        if (theEvent.type === 'paste') {
-            key = evt.clipboardData.getData('text/plain');
-        } else {
-        // Handle key press
-            var key = theEvent.keyCode || theEvent.which;
-            key = String.fromCharCode(key);
-        }
-        var regex = /[0-9]|\./;
-        if( !regex.test(key) ) {
-        theEvent.returnValue = false;
-        if(theEvent.preventDefault) theEvent.preventDefault();
-        }
+    reach(schema, name)
+        .validate(value)
+        .then(()=> setFormErrors({...formErrors, [name]: '' }))
+        .catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}))
+}
+
+
+const formSubmit = () =>{
+    const newAccount = {
+        username: formValues.username.trim(),
+        password: formValues.password.trim(),
+        code: formValues.code.trim(),
+        
     }
+        
+    console.log(newAccount)
+    postNewAccount(newAccount)
+}
+
+const inputChange = (name, value) =>{
+    validate(name, value)
+    setFormValues({
+        ...formValues, [name]: value
+    })
+}
+
+function validateNumbers(evt) {
+    var theEvent = evt || window.event;
+  
+    // Handle paste
+    if (theEvent.type === 'paste') {
+        key = evt.clipboardData.getData('text/plain');
+    } else {
+    // Handle key press
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+    }
+    var regex = /[0-9]|\./;
+    if( !regex.test(key) ) {
+      theEvent.returnValue = false;
+      if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
 
     return (
         <div>
@@ -75,7 +86,10 @@ function Signup(props) {
                 <div>{formErrors.password}</div>
                 <div>{formErrors.code}</div>
             </div>
-    <form className='form-container' onSubmit={formSubmit}>
+          <form className='form-container' onSubmit={(evt)=>{
+              evt.preventDefault()
+              formSubmit()
+          }}>
         <div className='username'>
             <label>
                 Username: <input 
@@ -130,4 +144,4 @@ function Signup(props) {
     )
 }
 
-export default connect(null, {postAccount})(Signup)
+export default Signup
