@@ -17,7 +17,7 @@ const initialFormErrors = {
 }
 
 function Signup() {
-const [username, setName] = useState('')
+const [username, setUsername] = useState('')
 const [password, setPassword] = useState('')
 
 const [formValues, setFormValues] = useState(initialFormValues)
@@ -81,7 +81,7 @@ const inputChange = (name, value) =>{
                 name='username' 
                 value={username} 
                 onChange={(evt)=>{
-                    setName(evt.target.value)
+                    setUsername(evt.target.value)
                     inputChange(evt.target.name, evt.target.value)  
              }}></input>
             </label>
