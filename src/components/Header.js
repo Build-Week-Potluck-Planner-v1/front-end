@@ -4,22 +4,20 @@ import styled from "styled-components";
 
 const HeaderStyle = styled.div`
   width: 100%;
-  height: 23rem;
+  height: 25rem;
   background-color: #8a2b06;
   color: white;
-
+  margin-bottom: 3rem;
   & .header {
     display: flex;
-    height: 4rem;
-    padding-top: 1rem;
+    height: 5rem;
+    padding-top: 2.5rem;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 1rem;
+    padding-bottom: 1.5rem;
     @media (max-width: 930px) {
       flex-direction: column;
-    }
-    @media (max-width: 480px) {
-      font-size: 0.5rem;
+      padding-bottom: 3rem;
     }
   }
 
@@ -27,14 +25,13 @@ const HeaderStyle = styled.div`
     width: 110%;
     height: 15rem;
     object-fit: cover;
-    margin-top: 2rem;
+    @media (max-width: 930px) {
+      height: 13rem;
+    }
   }
   & h1 {
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 3rem;
-    @media (max-width: 480px) {
-      font-size: 2rem;
-    }
   }
   & h1 img {
     height: 40px;
