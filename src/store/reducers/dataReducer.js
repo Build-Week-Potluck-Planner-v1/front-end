@@ -1,4 +1,4 @@
-import {} from '../actions/index'
+import { SIGN_UP_SUCCESS, SIGN_UP_ERROR } from '../actions/index'
 
 export const initialState = {
     currentUser: {
@@ -18,10 +18,19 @@ export const initialState = {
     // foods: [],
 }
 
-export const dataReducer = () => {
-    // switch(heyo) {
-    //     default:
-    //         return null;
-    // }
-    return null;
+export const dataReducer = (state = initialState, action) => {
+    switch(action.type) {
+        case SIGN_UP_SUCCESS:
+            return {
+                ...state,
+                currentUser: action.payload
+            }
+        case SIGN_UP_ERROR:
+            return {
+                ...state,
+                errprs: action.payload
+            }
+        default:
+            return state;
+    }
 }
