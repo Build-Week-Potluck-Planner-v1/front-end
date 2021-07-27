@@ -66,9 +66,3 @@ describe('Signup App', ()=>{
 
 })
 
-describe('Signup App', ()=>{
-    beforeEach(()=>{
-        cy.visit('http://localhost:3000/')
-
-    })
-})

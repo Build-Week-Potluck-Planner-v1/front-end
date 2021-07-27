@@ -41,28 +41,6 @@ describe('Signup App', ()=>{
     submitBtn().click()
     })
 
-    // it('check form validation',()=>{
-    //     nameInput()
-    //         .should('have.value','')
-    //         .type('Jo')
-    //         .clear()
-    //         .type('Joe')
-    //         .clear()
-    //         .should('have.value','')
-
-    //     passwordInput()
-    //         .should('have.value','')
-    //         .type('ThisIsABadPassword')
-    //         .clear()
-    //         .type('ThisIsAGoodPassword1234!')
-    //         .clear()
-    //         .should('have.value','')
-
-    //     nameInput()
-    //         .type('JGearheart')
-    //     passwordInput()
-    //         .type('ThisIsAGoodPassword1234!')
-    // })
 
 })
 
