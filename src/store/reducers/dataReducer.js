@@ -1,4 +1,14 @@
-import { LOGIN_SUCCESS, LOGIN_ERROR } from '../actions/index'
+import { 
+    LOGIN_SUCCESS, 
+    LOGIN_ERROR, 
+
+    GET_POTLUCKS_SUCCESS, 
+    GET_POTLUCKS_START,
+    GET_POTLUCKS_ERROR,
+
+    CREATE_POTLUCKS_SUCCESS,
+    CREATE_POTLUCKS_ERROR,
+} from '../actions/index'
 
 export const initialState = {
     currentUser: {
@@ -11,14 +21,8 @@ export const initialState = {
     },
     errors: '',
     loading: false,
-
-    // currentUsersPotlucks: [],
-    // potluck: {
-    //     id: 0,
-    //     foods: [],
-    //     date: '',
-    // },
-    // foods: [],
+    potlucks: [],
+    successMessage: '',
 }
 
 export const dataReducer = (state = initialState, action) => {
@@ -26,11 +30,41 @@ export const dataReducer = (state = initialState, action) => {
         case LOGIN_SUCCESS:
             return {
                 ...state,
+                loading: false,
                 currentUser: action.payload,
             }
         case LOGIN_ERROR:
             return{
                 ...state,
+                errors: action.payload,
+            }
+        case GET_POTLUCKS_SUCCESS:
+            return{
+                ...state,
+                potlucks: action.payload,
+                loading: false,
+            }
+        case GET_POTLUCKS_START:
+            return{
+                ...state,
+                loading: true,
+            }
+        case GET_POTLUCKS_ERROR:
+            return{
+                ...state,
+                loading: false,
+                errors: action.payload
+            }
+        case CREATE_POTLUCKS_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+                successMessage: 'Your potluck has been created! Go back to the dashboard to see it.',
+            }
+         case CREATE_POTLUCKS_ERROR:
+            return{
+                ...state,
+                loading: false,
                 errors: action.payload,
             }
         default:

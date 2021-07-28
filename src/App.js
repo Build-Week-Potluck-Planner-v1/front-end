@@ -9,12 +9,14 @@ import PrivateRoute from "./components/PrivateRoute";
 import Plan from "./components/Plan";
 import Invites from "./components/Invites";
 import Header from "./components/Header";
+import Potluck from "./components/Potluck";
 
 function App() {
   return (
     <div className="App">
       <Header />
       <Switch>
+        <PrivateRoute path="/potluck/:id" component={Potluck} />
         <PrivateRoute path="/invites" component={Invites} />
         <PrivateRoute path="/plan" component={Plan} />
         <PrivateRoute path="/dashboard" component={Dashboard} />
