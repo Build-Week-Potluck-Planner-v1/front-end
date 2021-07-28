@@ -15,6 +15,7 @@ const initialFormErrors = {
     password: '',
 }
 
+
 const FormStyle = styled.form`
     width:80%;
     max-width:40rem;
@@ -27,7 +28,7 @@ const FormStyle = styled.form`
         align-items:stretch;
         flex-direction:column;
     }
-    & label {
+    & label, h1 {
         font-weight:bold;
         flex:1;
         color: #464646;
@@ -100,16 +101,18 @@ const inputChange = (name, value) =>{
 
 
     return (
+
+         <FormStyle onSubmit={(evt)=>{
+              evt.preventDefault()
+              formSubmit()
+          }}>
         <div>
             <h1>Welcome, please signup below!</h1>
             <div className='errors'>
                 <div>{formErrors.username}</div>
                 <div>{formErrors.password}</div>
             </div>
-          <FormStyle onSubmit={(evt)=>{
-              evt.preventDefault()
-              formSubmit()
-          }}>
+         
         <div className='username'>
             <label>Username:</label>
                  <input 
@@ -140,8 +143,9 @@ const inputChange = (name, value) =>{
         
             <button id='button'>submit</button>
 
-          </FormStyle>  
+           
         </div>
+      </FormStyle>   
     )
 }
 
