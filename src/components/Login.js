@@ -9,6 +9,7 @@ const FormStyle = styled.form`
   margin: 2rem auto;
   padding: 2rem;
 
+  
   & .control {
     margin: 1rem 0;
     display: flex;

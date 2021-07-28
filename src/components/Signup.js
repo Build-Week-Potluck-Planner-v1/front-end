@@ -16,6 +16,44 @@ const initialFormErrors = {
 }
 
 
+const FormStyle = styled.form`
+    width:80%;
+    max-width:40rem;
+    margin: 2rem auto;
+    padding: 2rem;
+
+    & .username, .password {
+        margin: 1rem 0;
+        display:flex;
+        align-items:stretch;
+        flex-direction:column;
+    }
+    & label, h1 {
+        font-weight:bold;
+        flex:1;
+        color: #464646;
+        margin-bottom:1.0rem
+    }
+    & input {
+        flex:3;
+        font:inherit;
+        padding:0.35rem 0.35rem;
+        border-radius:6px;
+        border: 1px solid #ccc;
+    }
+    & input:focus {
+        outline: none;
+        border-color: #4f005f;
+        background: #f6dbfc;
+      }
+    .errors{
+        margin: 8px;
+        font-size: 0.7em;
+        color: red;
+
+ }
+`
+
 
 function Signup() {
 const [username, setUsername] = useState('')
@@ -63,22 +101,23 @@ const inputChange = (name, value) =>{
 
 
     return (
+
+         <FormStyle onSubmit={(evt)=>{
+              evt.preventDefault()
+              formSubmit()
+          }}>
         <div>
             <h1>Welcome, please signup below!</h1>
             <div className='errors'>
                 <div>{formErrors.username}</div>
                 <div>{formErrors.password}</div>
-                
             </div>
-          <form onSubmit={(evt)=>{
-              evt.preventDefault()
-              formSubmit()
-          }}>
+         
         <div className='username'>
             <label>Username:</label>
                  <input 
                 type='text' 
-                placeholder='Please enter username'
+                placeholder='Please enter a username'
                 name='username' 
                 value={username} 
                 onChange={(evt)=>{
@@ -104,8 +143,9 @@ const inputChange = (name, value) =>{
         
             <button id='button'>submit</button>
 
-          </form>  
+           
         </div>
+      </FormStyle>   
     )
 }
 
