@@ -1,13 +1,12 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import React from "react";
 import styled from "styled-components";
 
 const HeaderStyle = styled.div`
-  width: 100%;
+  width: auto;
   height: 25rem;
   background-color: #8a2b06;
   color: white;
-  margin-bottom: 3rem;
   & .header {
     display: flex;
     height: 5rem;
@@ -22,7 +21,7 @@ const HeaderStyle = styled.div`
   }
 
   & .headerImg {
-    width: 110%;
+    width: 100%;
     height: 15rem;
     object-fit: cover;
     @media (max-width: 930px) {
