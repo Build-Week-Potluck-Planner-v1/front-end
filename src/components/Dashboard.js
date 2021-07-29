@@ -16,8 +16,10 @@ function Dashboard(props) {
             <Link to = '/plan'><button>Plan a potluck</button></Link>
             <h2>Your Potlucks</h2>
             {props.potlucks.map(potluck => {
-                return <Link to = {`/potluck/${potluck.id}`}>
-                            <Potluck potluck = {potluck} key ={potluck.id}/>
+                return <Link key = {potluck.id} to = {`/potluck/${potluck.id}`}>
+                            <h2>{potluck.name}</h2>
+                            <p>{potluck.date}  {potluck.time}</p>
+                            <p>{potluck.location}</p>
                         </Link>
             })}
         </div>
