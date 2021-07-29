@@ -21,6 +21,7 @@ export default function ContactForm() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <h3>Contact Us</h3>
         <div>
           <label>
             Name:

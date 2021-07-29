@@ -1,5 +1,5 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import React from "react";
 import styled from "styled-components";
 
 const HeaderStyle = styled.div`
@@ -7,7 +7,6 @@ const HeaderStyle = styled.div`
   height: 25rem;
   background-color: #8a2b06;
   color: white;
-  margin-bottom: 3rem;
   & .header {
     display: flex;
     height: 5rem;
