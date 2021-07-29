@@ -12,6 +12,7 @@ const HomepageStyle = styled.div`
   padding: 2rem;
   padding-left: 10rem;
   color: white;
+  font-family: "Lucida Console", "Courier New", monospace;
   & .title {
     width: 75%;
   }
@@ -26,6 +27,7 @@ const HomepageStyle = styled.div`
     flex-direction: column;
   }
   & .imgDiv1 img {
+    border-radius: 1rem;
     width: 100%
     height: 40vh;
   }
@@ -36,6 +38,10 @@ const HomepageStyle = styled.div`
   }
   & .imgDiv2 img {
     margin-top: 3rem;
+    border-radius: 1rem;
+  }
+  & .imgDiv3 img {
+    border-radius: 1rem;
   }
   `;
 
@@ -201,7 +207,7 @@ function Homepage() {
             mattis molestie a iaculis.
           </p>
         </div>
-        <div className="imgDiv">
+        <div className="imgDiv3">
           <img src={food3} alt="food-1" />
         </div>
       </div>
