@@ -34,6 +34,7 @@ export const getPotlucks = () => (dispatch) => {
                 dispatch({type: GET_POTLUCKS_ERROR, payload: err})
             })
 }
+
 export const createPotluck = (potluck) => (dispatch) => {
         axiosWithAuth()
         .post('https://ft-potluck-planner-7-server.herokuapp.com/api/potlucks', potluck)

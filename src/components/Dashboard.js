@@ -2,7 +2,6 @@ import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import {getPotlucks} from '../store/actions/index'
-import Potluck from './Potluck';
 
 function Dashboard(props) {
     useEffect(() => {

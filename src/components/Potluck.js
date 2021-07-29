@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {useParams} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 function Potluck({potlucks}) {
     const stringId = useParams();
@@ -15,7 +16,7 @@ function Potluck({potlucks}) {
             <h3>{potluck[0].date} {potluck[0].time}</h3>
             <p>Location: {potluck[0].location}</p>
             <p>People going: [list[</p>
-            <button>Invite More</button>
+            <Link to = '/invites'><button>Invite More</button></Link>
         </div>
     )
 }
