@@ -6,16 +6,21 @@ import food3 from "../img/food3.jpg";
 import styled from "styled-components";
 
 const HomepageStyle = styled.div`
-  width: 100%;
+  width: auto;
   text-align: left;
   background-color: #bf4d20;
-  & h1 {
-    width: 50%;
+  padding: 2rem;
+  padding-left: 10rem;
+  color: white;
+  & .title {
+    width: 75%;
   }
   & .section {
+    padding: 1rem;
     display: flex;
   }
   & .sectionText {
+    padding: 0 2rem;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -29,7 +34,10 @@ const HomepageStyle = styled.div`
     flex-direction: row-reverse;
     justify-content: flex-end;
   }
-`;
+  & .imgDiv2 img {
+    margin-top: 3rem;
+  }
+  `;
 
 function Homepage() {
   return (
@@ -137,7 +145,7 @@ function Homepage() {
             imperdiet proin.
           </p>
         </div>
-        <div className="imgDiv">
+        <div className="imgDiv2">
           <img src={food2} alt="food-1" />
         </div>
       </div>
