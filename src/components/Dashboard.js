@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import {getPotlucks} from '../store/actions/index'
 
 function Dashboard(props) {
+    const {getPotlucks} = props
     useEffect(() => {
-        props.getPotlucks()
-    }, [])
+        getPotlucks()
+    },[getPotlucks])
 
     return (
         <div>

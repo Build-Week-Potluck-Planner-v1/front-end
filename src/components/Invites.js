@@ -4,9 +4,10 @@ import {getInvites} from '../store/actions/index'
 import Invite from './Invite'
 
 function Invites(props) {
+    const {getInvites} = props
     useEffect(() => {
-        props.getInvites();
-    },[])
+        getInvites();
+    },[getInvites])
     
     return (
         <div>
