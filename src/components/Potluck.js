@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import {useParams} from 'react-router-dom'
 import {postInvites} from '../store/actions/index'
+import {getFoods} from '../store/actions/index'
+import {postFoods} from '../store/actions/index'
 
 function Potluck(props) {
     const {potlucks, postInvites} = props
@@ -10,14 +12,26 @@ function Potluck(props) {
     const potluck = potlucks.filter((event) => event.id === id)
 
     const [invite, setInvite] = useState({})
+    const [foodsInput, setFoodsInput] = useState('')
+
+    useEffect(() => {
+        props.getFoods()
+    }, [])
     
-    const changeHandler = (e) => {
+    const changeFriendsHandler = (e) => {
         setInvite({guest_id: parseInt(e.target.value), potluck_id: potluck[0].id})
     }
-    const submitHandler = (e) => {
+    const submitFriendsHandler = (e) => {
         e.preventDefault();
         postInvites(invite);
-        console.log('HEYOOOOOOO', invite)
+    }
+
+    const changeFoods = (e) => {
+        setFoodsInput(e.target.value)
+    }
+    const submitFoods = (e) => {
+        e.preventDefault();
+        postFoods(foodsInput)
     }
 
     return (
@@ -28,16 +42,25 @@ function Potluck(props) {
             <p>Location: {potluck[0].location}</p>
             <p>Event ID: {potluck[0].id}</p>
             <p>People going: [list[</p>
-            <form onSubmit ={submitHandler}>
+            <form>
                 <label>Friend
                     <input 
                         name = 'Friend'
                         type = 'text'
                         placeholder = 'Enter your friends ID'
-                        onChange = {changeHandler}
+                        onChange = {changeFriendsHandler}
                     />
+                    <button onClick = {submitFriendsHandler}>Invite!</button>
                 </label>
-                <button>Invite!</button>
+                <label>Foods you'd like to bring
+                    <input 
+                        name = 'foods'
+                        type = 'text'
+                        placeholder = 'Enter a food'
+                        onChange = {changeFoods}
+                    />
+                    <button onClick = {submitFoods}>Bring this food!</button>
+                </label>
             </form>
         </div>
     )
@@ -45,8 +68,9 @@ function Potluck(props) {
 
 const mapStateToProps = (state) => {
     return {
-        potlucks: state.dataReducer.potlucks
+        potlucks: state.dataReducer.potlucks,
+        foods: state.dataReducer.foods
     }
 }
 
-export default connect(mapStateToProps, {postInvites})(Potluck)
+export default connect(mapStateToProps, {postInvites, postFoods, getFoods})(Potluck)
