@@ -6,6 +6,19 @@ import {
     GET_POTLUCKS_START,
     GET_POTLUCKS_ERROR,
 
+    GET_FOODS_SUCCESS,
+
+    GET_INVITES_SUCCESS, 
+    GET_INVITES_START,
+    GET_INVITES_ERROR,
+
+    POST_INVITES_SUCCESS,
+    POST_INVITES_ERROR,
+
+    POST_FOODS_SUCCESS,
+
+    RSVP_SUCCESS,
+
     CREATE_POTLUCKS_SUCCESS,
     CREATE_POTLUCKS_ERROR,
 } from '../actions/index'
@@ -22,7 +35,10 @@ export const initialState = {
     errors: '',
     loading: false,
     potlucks: [],
+    invites: [],
     successMessage: '',
+    foods: [],
+    selectedFoods: [],
 }
 
 export const dataReducer = (state = initialState, action) => {
@@ -55,6 +71,29 @@ export const dataReducer = (state = initialState, action) => {
                 loading: false,
                 errors: action.payload
             }
+        case GET_INVITES_START:
+            return{
+                ...state,
+                loading: true,
+            }
+        case GET_INVITES_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+                invites: action.payload
+            }
+        case GET_INVITES_ERROR:
+            return{
+                ...state,
+                loading: false,
+                errors: action.payload,
+            }
+        case GET_FOODS_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+                foods: action.payload,
+            }
         case CREATE_POTLUCKS_SUCCESS:
             return{
                 ...state,
@@ -66,6 +105,22 @@ export const dataReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 errors: action.payload,
+            }
+        case POST_INVITES_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+            }
+        case POST_FOODS_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+            }
+        case RSVP_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+                successMessage: 'You have RSVPed',
             }
         default:
             return state;

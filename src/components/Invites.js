@@ -1,13 +1,29 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { connect } from 'react-redux'
+import {getInvites} from '../store/actions/index'
+import Invite from './Invite'
 
-function Invites() {
+function Invites(props) {
+    useEffect(() => {
+        props.getInvites();
+    },[])
+    
     return (
         <div>
             <h1>Invites Page</h1>
-            <h2>This would be a card showing invites have recieved</h2>
-            <h2>This would be a card showing invites you have sent</h2>
+            {props.invites.map((invite, idx) => {
+                return (
+                    <Invite invite = {invite} key = {idx}/>
+                )
+            })}
         </div>
     )
 }
 
-export default Invites
+const mapStateToProps = (state) => {
+    return{
+        invites: state.dataReducer.invites,
+    }
+}
+
+export default connect(mapStateToProps, {getInvites})(Invites)
