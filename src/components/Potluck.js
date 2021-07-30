@@ -14,9 +14,11 @@ function Potluck(props) {
     const [invite, setInvite] = useState({})
     const [foodsInput, setFoodsInput] = useState('')
 
+    const {getFoods} = props
+
     useEffect(() => {
-        props.getFoods()
-    }, [])
+        getFoods()
+    }, [getFoods])
     
     const changeFriendsHandler = (e) => {
         setInvite({guest_id: parseInt(e.target.value), potluck_id: potluck[0].id})
