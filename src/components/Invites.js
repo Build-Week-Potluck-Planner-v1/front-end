@@ -6,8 +6,8 @@ function Invites(props) {
     useEffect(() => {
         props.getInvites();
     },[])
-    const clickHandler = (e) => {
-
+    const clickHandler = (invite) => {
+        invite.has_rsvped = !invite.has_rsvped;
     }
     return (
         <div>
@@ -16,7 +16,7 @@ function Invites(props) {
                 if(invite.has_rsvped === false){
                     return (
                         <div key = {idx}>
-                            <p>Invite Id is {invite.id} <button onClick = {clickHandler}>RSVP Here!</button></p>
+                            <p>Invite Id is {invite.id} <button onClick = {clickHandler(invite)}>RSVP Here!</button></p>
                             
                         </div>
                     )
