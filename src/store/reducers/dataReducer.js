@@ -6,6 +6,13 @@ import {
     GET_POTLUCKS_START,
     GET_POTLUCKS_ERROR,
 
+    GET_INVITES_SUCCESS, 
+    GET_INVITES_START,
+    GET_INVITES_ERROR,
+
+    POST_INVITES_SUCCESS,
+    POST_INVITES_ERROR,
+
     CREATE_POTLUCKS_SUCCESS,
     CREATE_POTLUCKS_ERROR,
 } from '../actions/index'
@@ -22,6 +29,7 @@ export const initialState = {
     errors: '',
     loading: false,
     potlucks: [],
+    invites: [],
     successMessage: '',
 }
 
@@ -55,6 +63,23 @@ export const dataReducer = (state = initialState, action) => {
                 loading: false,
                 errors: action.payload
             }
+        case GET_INVITES_START:
+            return{
+                ...state,
+                loading: true,
+            }
+        case GET_INVITES_SUCCESS:
+            return{
+                ...state,
+                loading: false,
+                invites: action.payload
+            }
+        case GET_INVITES_ERROR:
+            return{
+                ...state,
+                loading: false,
+                errors: action.payload,
+            }  
         case CREATE_POTLUCKS_SUCCESS:
             return{
                 ...state,
@@ -66,6 +91,11 @@ export const dataReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 errors: action.payload,
+            }
+        case POST_INVITES_SUCCESS:
+            return{
+                ...state,
+                loading: false,
             }
         default:
             return state;

@@ -1,13 +1,38 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { connect } from 'react-redux'
+import {getInvites} from '../store/actions/index'
 
-function Invites() {
+function Invites(props) {
+    useEffect(() => {
+        props.getInvites();
+    },[])
+    const clickHandler = (e) => {
+
+    }
     return (
         <div>
             <h1>Invites Page</h1>
-            <h2>This would be a card showing invites have recieved</h2>
-            <h2>This would be a card showing invites you have sent</h2>
+            {props.invites.map((invite, idx) => {
+                if(invite.has_rsvped === false){
+                    return (
+                        <div key = {idx}>
+                            <p>Invite Id is {invite.id} <button onClick = {clickHandler}>RSVP Here!</button></p>
+                            
+                        </div>
+                    )
+                    
+                }else{
+                    return <button>Already RSVP'd</button>
+                }
+            })}
         </div>
     )
 }
 
-export default Invites
+const mapStateToProps = (state) => {
+    return{
+        invites: state.dataReducer.invites,
+    }
+}
+
+export default connect(mapStateToProps, {getInvites})(Invites)
